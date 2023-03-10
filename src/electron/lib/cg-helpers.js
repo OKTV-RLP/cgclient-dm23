@@ -84,7 +84,23 @@ const cgStop = async (layer) => {
 	}
 };
 
+// Clear CG Leyer
+const cgClear = async (layer) => {
+	const { error, request } = CG.cgClear({
+		channel: 1,
+		layer
+	});
+
+	if (error) {
+		log.error('Error sending cgClear', error);
+	} else {
+		await request;
+		log.debug(`Cleared Layer ${layer}`);
+	}
+};
+
 module.exports.getCGConnection = getCGConnection;
 module.exports.getLayerFromSlot = getLayerFromSlot;
 module.exports.cgPlay = cgPlay;
 module.exports.cgStop = cgStop;
+module.exports.cgClear = cgClear;

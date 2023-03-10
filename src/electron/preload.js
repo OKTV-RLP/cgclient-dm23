@@ -8,11 +8,14 @@ const WINDOW_API = {
 		return await ipcRenderer.invoke('get/CGStatus');
 	},
 	playCG: (data) => {
-		console.log(data);
+		// console.log(data);
 		ipcRenderer.send('CG/Play', data);
 	},
 	stopCG: (data) => {
 		ipcRenderer.send('CG/Stop', data);
+	},
+	clearCG: (data) => {
+		ipcRenderer.send('CG/Clear', data);
 	},
 	onStatusCG: (callback) => {
 		ipcRenderer.on('status/CG', callback);

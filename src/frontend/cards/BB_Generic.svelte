@@ -8,6 +8,8 @@
 	let bb_col2 = '';
 	let autoPlayTime = 5;
 
+	const slot = 'defaultBB';
+
 	onMount(async () => {
 		// Get Default Values from Config
 		autoPlayTime = await window.api.getAPTime('defaultBB');
@@ -15,7 +17,7 @@
 
 	const handlePlay = () => {
 		const data = {
-			slot: 'defaultBB',
+			slot,
 			auto: false,
 			templateData: [bb_col1, bb_col2],
 			duration: autoPlayTime
@@ -25,12 +27,16 @@
 	};
 
 	const handleStop = () => {
-		window.api.stopCG('defaultBB');
+		window.api.stopCG(slot);
+	};
+
+	const handleClear = () => {
+		window.api.clearCG(slot);
 	};
 
 	const handleAutoPlay = () => {
 		const data = {
-			slot: 'defaultBB',
+			slot,
 			auto: true,
 			templateData: [bb_col1, bb_col2],
 			duration: autoPlayTime
@@ -48,6 +54,7 @@
 			<div class="flex flex-row gap-2">
 				<Button style="green" on:click={handlePlay}>Start</Button>
 				<Button style="red" on:click={handleStop}>Stop</Button>
+				<Button style="blue" on:click={handleClear}>!Clear!</Button>
 			</div>
 
 			<div class="flex flex-row gap-2 justify-end">

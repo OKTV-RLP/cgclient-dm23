@@ -5,7 +5,7 @@ const log = require('electron-log');
 const { is } = require('electron-util');
 const settings = require('./lib/settings');
 const CG = require('./lib/casparcg');
-const { getCGConnection, getLayerFromSlot, cgPlay, cgStop } = require('./lib/cg-helpers');
+const { getCGConnection, getLayerFromSlot, cgPlay, cgStop, cgClear } = require('./lib/cg-helpers');
 
 let mainWindow;
 
@@ -91,6 +91,11 @@ app.whenReady().then(() => {
 	ipcMain.on('CG/Stop', async (event, data) => {
 		const layer = await getLayerFromSlot(data);
 		cgStop(layer);
+	});
+
+	ipcMain.on('CG/Clear', async (event, data) => {
+		const layer = await getLayerFromSlot(data);
+		cgClear(layer);
 	});
 });
 
