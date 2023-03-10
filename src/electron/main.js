@@ -1,64 +1,90 @@
+// eslint-disable-next-line no-unused-vars
 const { app, BrowserWindow, ipcMain, webContents } = require('electron');
 const path = require('path');
-// const log = require('electron-log');
-// const CG = require('./import/casparcg');
+const log = require('electron-log');
+const { is } = require('electron-util');
+const settings = require('./lib/settings');
+const CG = require('./lib/casparcg');
 
-// Electron Live Reloader for Development
-// try {
-//     require('electron-reloader')(module);
-// } catch {}
-
-let win = null;
-
-// settings.set('cgServer', {
-//     IP: '127.0.0.1',
-//     ACMP_Port: 5250,
-//     OSC_Port: 8888,
-//     Queue: 1,
-// });
+let mainWindow;
 
 // Main Window Function
 function createMainWindow() {
-    win = new BrowserWindow({
-        width: 1280,
-        height: 720,
-        webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
-            // nodeIntegration: true,
-        },
-    });
+	mainWindow = new BrowserWindow({
+		title: 'naheTV DM CasparCG Client',
+		width: is.development ? 1500 : 1200,
+		height: 720,
+		show: false,
+		backgroundColor: 'gray',
+		autoHideMenuBar: is.development ? false : true,
+		webPreferences: {
+			preload: path.join(__dirname, 'preload.js')
+		}
+	});
 
-    win.loadFile(path.join(__dirname, '../../public/index.html'));
+	mainWindow.loadFile(path.join(__dirname, '../../public/index.html'));
+
+	mainWindow.once('ready-to-show', () => {
+		mainWindow.show();
+		// Open DevTools in Dev Mode
+		if (is.development) {
+			mainWindow.webContents.openDevTools();
+		}
+	});
 }
 
+// Hot Reload in Dev
+if (is.development) {
+	require('electron-reloader')(module);
+	log.info('App running in Dev mode.');
+}
+
+// ----- Run on App Start ----- //
+
 app.whenReady().then(() => {
-    createMainWindow();
+	createMainWindow();
+	log.info('App loaded.');
 
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createMainWindow();
-        }
-    });
-});
+	// OSX Window Recreation on Activate
+	app.on('activate', () => {
+		if (BrowserWindow.getAllWindows().length === 0) {
+			createMainWindow();
+		}
+	});
 
-app.on('ready', () => {
-    // Connect to CG-Server
-    // CG.connect();
-    // log.info('App ready');
+	// Connect to CasparCG with slight delay
+	setTimeout(() => {
+		CG.connect();
+		log.debug('CG-Connection initiated.');
+	}, 2000);
+
+	CG.on('connect', () => {
+		log.info(`CG-Server connected on ${CG.host}:${CG.port}`);
+		mainWindow.webContents.send('status/CG', { status: true, host: CG.host, port: CG.port });
+	});
+
+	CG.on('disconnect', () => {
+		log.info(`CG-Server disconnected from ${CG.host}:${CG.port}`);
+		mainWindow.webContents.send('status/CG', { status: false, host: CG.host, port: CG.port });
+	});
+
+	CG.on('error', (err) => {
+		log.error(`CG-Server Error: ${err}`);
+	});
+
+	// Handle IPC Requests
+	ipcMain.handle('get/APTime', async (event, args) => {
+		const time = await settings.get(`cgtTemplate.${args}.defaultPlayTime`);
+		return time;
+	});
 });
 
 // Close App (with MacOS exeption)
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        // CG.disconnect();
-        app.quit();
-    }
+	if (process.platform !== 'darwin') {
+		// CG.disconnect();
+		app.quit();
+	}
 });
 
-// Handle IPC Requests
-
-ipcMain.handle('getAPTime', (event, args) => {
-    console.log(args);
-    const value = 7;
-    return value;
-});
+app.allowRendererProcessReuse = true;
