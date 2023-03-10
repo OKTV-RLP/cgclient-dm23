@@ -5,6 +5,7 @@ const log = require('electron-log');
 const { is } = require('electron-util');
 const settings = require('./lib/settings');
 const CG = require('./lib/casparcg');
+const { getCGConnection, getLayerFromSlot, cgPlay, cgStop } = require('./lib/cg-helpers');
 
 let mainWindow;
 
@@ -58,14 +59,14 @@ app.whenReady().then(() => {
 		log.debug('CG-Connection initiated.');
 	}, 2000);
 
-	CG.on('connect', () => {
-		log.info(`CG-Server connected on ${CG.host}:${CG.port}`);
-		mainWindow.webContents.send('status/CG', { status: true, host: CG.host, port: CG.port });
+	CG.on('connect', async () => {
+		const connection = await getCGConnection();
+		await mainWindow.webContents.send('status/CG', connection);
 	});
 
-	CG.on('disconnect', () => {
-		log.info(`CG-Server disconnected from ${CG.host}:${CG.port}`);
-		mainWindow.webContents.send('status/CG', { status: false, host: CG.host, port: CG.port });
+	CG.on('disconnect', async () => {
+		const connection = await getCGConnection();
+		await mainWindow.webContents.send('status/CG', connection);
 	});
 
 	CG.on('error', (err) => {
@@ -76,6 +77,20 @@ app.whenReady().then(() => {
 	ipcMain.handle('get/APTime', async (event, args) => {
 		const time = await settings.get(`cgtTemplate.${args}.defaultPlayTime`);
 		return time;
+	});
+
+	ipcMain.handle('get/CGStatus', async () => {
+		const connection = await getCGConnection();
+		return connection;
+	});
+
+	ipcMain.on('CG/Play', (event, data) => {
+		cgPlay(data.slot, data.auto, data.templateData, data.duration);
+	});
+
+	ipcMain.on('CG/Stop', async (event, data) => {
+		const layer = await getLayerFromSlot(data);
+		cgStop(layer);
 	});
 });
 

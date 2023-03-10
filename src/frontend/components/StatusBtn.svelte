@@ -8,7 +8,7 @@
 	$: connString = connection.status ? 'connected' : 'disconnected';
 	$: title = `Host: ${connection.host}, Port: ${connection.port}`;
 
-	$: console.log(connection);
+	// $: console.log(connection);
 </script>
 
 <button class={classes} {title}>{name} {connString}</button>

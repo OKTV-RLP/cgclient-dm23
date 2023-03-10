@@ -16,7 +16,9 @@
 		':' +
 		('00' + time.getSeconds()).slice(-2);
 
-	onMount(() => {
+	onMount(async () => {
+		connection = await window.api.getCGStatus();
+
 		const interval = setInterval(() => {
 			time = new Date();
 		}, 500);
