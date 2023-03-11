@@ -13,6 +13,7 @@ const {
 	cgUpdate,
 	cgClear
 } = require('./lib/cg-helpers');
+// const { getCSV } = require('./lib/csv');
 
 let mainWindow;
 
@@ -60,6 +61,8 @@ app.whenReady().then(() => {
 			createMainWindow();
 		}
 	});
+
+	// getCSV();
 
 	// Connect to CasparCG with slight delay
 	setTimeout(() => {

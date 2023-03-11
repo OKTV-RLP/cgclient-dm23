@@ -32,6 +32,14 @@ const defaults = {
 				{ name: 'Double Under Cup 2023', disciplines: [] },
 				{ name: 'Triple Under Cup 2023', disciplines: [] }
 			]
+		},
+		jumpBB: {
+			template: '',
+			keys: ['f0', 'f1', 'f2'],
+			layer: 22,
+			sendJSON: false,
+			defaultPlayTime: 7,
+			dataSource: ''
 		}
 	}
 };
