@@ -4,6 +4,9 @@ const WINDOW_API = {
 	getAPTime: async (template) => {
 		return await ipcRenderer.invoke('get/APTime', template);
 	},
+	getSelectOptions: async (template) => {
+		return await ipcRenderer.invoke('get/SelectOptions', template);
+	},
 	getCGStatus: async () => {
 		return await ipcRenderer.invoke('get/CGStatus');
 	},

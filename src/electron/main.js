@@ -79,6 +79,14 @@ app.whenReady().then(() => {
 		return time;
 	});
 
+	ipcMain.handle('get/SelectOptions', async (event, args) => {
+		const options = await settings.get(`cgtTemplate.${args}.selectOptions`);
+		if (options) {
+			log.debug(options);
+			return options;
+		}
+	});
+
 	ipcMain.handle('get/CGStatus', async () => {
 		const connection = await getCGConnection();
 		return connection;
