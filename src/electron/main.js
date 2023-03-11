@@ -21,10 +21,11 @@ function createMainWindow() {
 	mainWindow = new BrowserWindow({
 		title: 'naheTV DM CasparCG Client',
 		width: is.development ? 1500 : 1200,
-		height: 720,
+		height: is.development ? 760 : 730,
 		show: false,
 		backgroundColor: 'gray',
 		autoHideMenuBar: is.development ? false : true,
+		// autoHideMenuBar: true,
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js')
 		}

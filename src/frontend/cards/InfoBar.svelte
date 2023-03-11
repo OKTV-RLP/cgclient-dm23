@@ -85,7 +85,7 @@
 				<Button style="blue" on:click={handleClear}>!Clear!</Button>
 			</div>
 			<div class="flex flex-row justify-end">
-				<Button style="light-green" on:click={handleUpdate}>Update</Button>
+				<Button style="light-green" on:click={handleUpdate}>Auto-Update</Button>
 			</div>
 		</div>
 	</form></Card

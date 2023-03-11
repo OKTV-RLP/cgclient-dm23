@@ -6,8 +6,11 @@
 
 <main class="bg-gray-800 w-full h-full p-4 text-gray-100 ">
 	<TopBar />
-	<BBGeneric />
-	<InfoBar />
+	<!-- Content Grid -->
+	<div class="flex gap-5 flex-wrap">
+		<BBGeneric />
+		<InfoBar />
+	</div>
 </main>
 
 <style global>
