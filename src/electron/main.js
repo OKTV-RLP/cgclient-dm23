@@ -5,7 +5,14 @@ const log = require('electron-log');
 const { is } = require('electron-util');
 const settings = require('./lib/settings');
 const CG = require('./lib/casparcg');
-const { getCGConnection, getLayerFromSlot, cgPlay, cgStop, cgClear } = require('./lib/cg-helpers');
+const {
+	getCGConnection,
+	getLayerFromSlot,
+	cgPlay,
+	cgStop,
+	cgUpdate,
+	cgClear
+} = require('./lib/cg-helpers');
 
 let mainWindow;
 
@@ -82,7 +89,7 @@ app.whenReady().then(() => {
 	ipcMain.handle('get/SelectOptions', async (event, args) => {
 		const options = await settings.get(`cgtTemplate.${args}.selectOptions`);
 		if (options) {
-			log.debug(options);
+			// log.debug(options);
 			return options;
 		}
 	});
@@ -99,6 +106,10 @@ app.whenReady().then(() => {
 	ipcMain.on('CG/Stop', async (event, data) => {
 		const layer = await getLayerFromSlot(data);
 		cgStop(layer);
+	});
+
+	ipcMain.on('CG/Update', async (event, data) => {
+		cgUpdate(data.slot, data.auto, data.templateData, data.timeout);
 	});
 
 	ipcMain.on('CG/Clear', async (event, data) => {

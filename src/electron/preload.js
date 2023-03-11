@@ -20,6 +20,9 @@ const WINDOW_API = {
 	clearCG: (data) => {
 		ipcRenderer.send('CG/Clear', data);
 	},
+	updateCG: (data) => {
+		ipcRenderer.send('CG/Update', data);
+	},
 	onStatusCG: (callback) => {
 		ipcRenderer.on('status/CG', callback);
 	}

@@ -46,7 +46,16 @@
 	};
 
 	const handleUpdate = () => {
-		console.log('update');
+		const ln1 = infoOptions[id_col1].name;
+		const ln2 = disabled ? ' ' : disciplines[id_col2];
+		const data = {
+			slot,
+			auto: false,
+			templateData: [ln1, ln2],
+			timeout: 1000
+		};
+		// console.log(data);
+		window.api.updateCG(data);
 	};
 </script>
 

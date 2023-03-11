@@ -30,7 +30,7 @@ const getLayerFromSlot = async (slot) => {
 };
 
 // Play Template
-const cgPlay = async (slot, auto, templateData, apDuration) => {
+const cgPlay = async (slot, auto, templateData, apDuration = 5) => {
 	const templateSettings = await settings.get(`cgtTemplate.${slot}`);
 	const { template, keys, layer, sendJSON } = templateSettings;
 	let data;
@@ -84,6 +84,20 @@ const cgStop = async (layer) => {
 	}
 };
 
+// Auto-Update Layer (stop, update, play)
+const cgUpdate = async (slot, auto, templateData, timeout) => {
+	const templateSettings = await settings.get(`cgtTemplate.${slot}`);
+	const { layer } = templateSettings;
+
+	log.debug(`Auto-Update Layer ${layer} with Timeout ${timeout}ms.`);
+	// Stop running Template
+	await cgStop(layer);
+	// Wait for timeout Duration and restart with new Data
+	setTimeout(async () => {
+		await cgPlay(slot, auto, templateData);
+	}, timeout);
+};
+
 // Clear CG Leyer
 const cgClear = async (layer) => {
 	const { error, request } = CG.cgClear({
@@ -103,4 +117,5 @@ module.exports.getCGConnection = getCGConnection;
 module.exports.getLayerFromSlot = getLayerFromSlot;
 module.exports.cgPlay = cgPlay;
 module.exports.cgStop = cgStop;
+module.exports.cgUpdate = cgUpdate;
 module.exports.cgClear = cgClear;
