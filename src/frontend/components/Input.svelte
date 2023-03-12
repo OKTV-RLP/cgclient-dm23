@@ -18,6 +18,7 @@
 			{name}
 			bind:value
 			{required}
+			on:input
 		/>
 	{:else if type == 'number'}
 		<input
@@ -27,6 +28,7 @@
 			{name}
 			bind:value
 			{required}
+			on:input
 		/>
 	{:else}
 		<!-- else content here -->

@@ -4,17 +4,40 @@
 	import Input from '../components/Input.svelte';
 	import { onMount } from 'svelte';
 
-	let bb_col1 = '';
+	let bb_col1;
 	let bb_col2 = '';
 	let bb_col3 = '';
 	let autoPlayTime = 5;
+	let jumpers = [];
+	let selectedJumper = {};
 
 	const slot = 'jumpBB';
+
+	const updateCSV = async () => {
+		jumpers = await window.api.getCSV();
+	};
 
 	onMount(async () => {
 		// Get Default Values from Config
 		autoPlayTime = await window.api.getAPTime(slot);
+		// Get CSV Data for Jumpers
+		await updateCSV();
 	});
+
+	const handleNrInput = () => {
+		if (jumpers.length === 0) {
+			return;
+		}
+		const result = jumpers.find((jumper) => jumper.stn == bb_col1);
+		if (result !== undefined) {
+			selectedJumper = result;
+			bb_col2 = selectedJumper.name;
+			bb_col3 = selectedJumper.verein;
+		} else {
+			bb_col2 = '';
+			bb_col3 = '';
+		}
+	};
 
 	const handlePlay = () => {
 		const data = {
@@ -53,11 +76,11 @@
 			name="bb_col1"
 			id="bb_col1"
 			bind:value={bb_col1}
-			required
 			type="number"
+			on:input={handleNrInput}
 		/>
-		<Input label="Name" name="bb_col2" id="bb_col2" bind:value={bb_col2} required />
-		<Input label="Verein" name="bb_col3" id="bb_col3" bind:value={bb_col3} required />
+		<Input label="Name" name="bb_col2" id="bb_col2" bind:value={bb_col2} />
+		<Input label="Verein" name="bb_col3" id="bb_col3" bind:value={bb_col3} />
 
 		<div class="flex flex-row gap-2 mt-2 justify-between h-10 w-full">
 			<div class="flex flex-row gap-2">

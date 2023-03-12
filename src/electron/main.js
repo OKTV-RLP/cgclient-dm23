@@ -13,7 +13,7 @@ const {
 	cgUpdate,
 	cgClear
 } = require('./lib/cg-helpers');
-// const { getCSV } = require('./lib/csv');
+const { getCSV } = require('./lib/csv');
 
 let mainWindow;
 
@@ -22,7 +22,7 @@ function createMainWindow() {
 	mainWindow = new BrowserWindow({
 		title: 'naheTV DM CasparCG Client',
 		width: is.development ? 1500 : 1200,
-		height: is.development ? 760 : 730,
+		height: is.development ? 840 : 820,
 		show: false,
 		backgroundColor: 'gray',
 		autoHideMenuBar: is.development ? false : true,
@@ -62,8 +62,6 @@ app.whenReady().then(() => {
 		}
 	});
 
-	// getCSV();
-
 	// Connect to CasparCG with slight delay
 	setTimeout(() => {
 		CG.connect();
@@ -96,6 +94,11 @@ app.whenReady().then(() => {
 			// log.debug(options);
 			return options;
 		}
+	});
+
+	ipcMain.handle('get/CSVData', async () => {
+		const results = await getCSV();
+		return results;
 	});
 
 	ipcMain.handle('get/CGStatus', async () => {

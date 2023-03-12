@@ -7,6 +7,9 @@ const WINDOW_API = {
 	getSelectOptions: async (template) => {
 		return await ipcRenderer.invoke('get/SelectOptions', template);
 	},
+	getCSV: async () => {
+		return await ipcRenderer.invoke('get/CSVData');
+	},
 	getCGStatus: async () => {
 		return await ipcRenderer.invoke('get/CGStatus');
 	},

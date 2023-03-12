@@ -9,9 +9,17 @@
 	// 	// console.log(infoOptions);
 	// });
 
-	const handleTest = () => {
-		console.log('test');
+	let loading = false;
+	let csv = [];
+
+	const handleTest = async () => {
+		loading = true;
+		csv = await window.api.testCSV();
+		loading = false;
 	};
+
+	$: console.log(loading);
+	$: console.log(csv);
 </script>
 
 <Card title="Test" description=" ">

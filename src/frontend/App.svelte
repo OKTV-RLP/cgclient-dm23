@@ -13,7 +13,6 @@
 		<BBGeneric />
 		<InfoBar />
 		<BBJumper />
-		<Test />
 	</div>
 </main>
 
