@@ -23,6 +23,9 @@ const WINDOW_API = {
 	clearCG: (data) => {
 		ipcRenderer.send('CG/Clear', data);
 	},
+	clearAllCG: () => {
+		ipcRenderer.send('CG/ClearAll');
+	},
 	updateCG: (data) => {
 		ipcRenderer.send('CG/Update', data);
 	},

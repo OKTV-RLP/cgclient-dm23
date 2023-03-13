@@ -113,9 +113,22 @@ const cgClear = async (layer) => {
 	}
 };
 
+// Clear CG Channel
+const cgClearAll = async () => {
+	const { error, request } = CG.clear({ channel: 1 });
+
+	if (error) {
+		log.error('Error sending cgClearAll', error);
+	} else {
+		await request;
+		log.debug(`Cleared Channel.`);
+	}
+};
+
 module.exports.getCGConnection = getCGConnection;
 module.exports.getLayerFromSlot = getLayerFromSlot;
 module.exports.cgPlay = cgPlay;
 module.exports.cgStop = cgStop;
 module.exports.cgUpdate = cgUpdate;
 module.exports.cgClear = cgClear;
+module.exports.cgClearAll = cgClearAll;

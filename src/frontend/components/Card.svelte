@@ -1,6 +1,6 @@
 <script>
 	export let title;
-	export let description;
+	export let description = '';
 </script>
 
 <div class="flex flex-col bg-gray-700 p-3 rounded-md mt-2 max-w-md">

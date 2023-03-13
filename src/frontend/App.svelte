@@ -3,7 +3,7 @@
 	import BBGeneric from './cards/BB_Generic.svelte';
 	import InfoBar from './cards/InfoBar.svelte';
 	import BBJumper from './cards/BB_Jumper.svelte';
-	import Test from './cards/Test.svelte';
+	import General from './cards/General.svelte';
 </script>
 
 <main class="bg-gray-800 w-full h-full p-4 text-gray-100 ">
@@ -13,6 +13,7 @@
 		<BBGeneric />
 		<InfoBar />
 		<BBJumper />
+		<General />
 	</div>
 </main>
 

@@ -11,7 +11,8 @@ const {
 	cgPlay,
 	cgStop,
 	cgUpdate,
-	cgClear
+	cgClear,
+	cgClearAll
 } = require('./lib/cg-helpers');
 const { getCSV } = require('./lib/csv');
 
@@ -122,6 +123,10 @@ app.whenReady().then(() => {
 	ipcMain.on('CG/Clear', async (event, data) => {
 		const layer = await getLayerFromSlot(data);
 		cgClear(layer);
+	});
+
+	ipcMain.on('CG/ClearAll', async () => {
+		cgClearAll();
 	});
 });
 
