@@ -3,18 +3,20 @@
 	import Button from '../components/Button.svelte';
 	import Input from '../components/Input.svelte';
 	import { onMount } from 'svelte';
+	import { jumpers } from '../stores/stores';
 
 	let bb_col1;
 	let bb_col2 = '';
 	let bb_col3 = '';
 	let autoPlayTime = 5;
-	let jumpers = [];
+	// let jumpers = [];
 	let selectedJumper = {};
 
 	const slot = 'jumpBB';
 
 	const updateCSV = async () => {
-		jumpers = await window.api.getCSV();
+		const result = await window.api.getCSV();
+		jumpers.set(result);
 	};
 
 	onMount(async () => {
@@ -28,7 +30,7 @@
 		if (jumpers.length === 0) {
 			return;
 		}
-		const result = jumpers.find((jumper) => jumper.stn == bb_col1);
+		const result = $jumpers.find((jumper) => jumper.stn == bb_col1);
 		if (result !== undefined) {
 			selectedJumper = result;
 			bb_col2 = selectedJumper.name;
