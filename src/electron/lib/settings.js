@@ -4,7 +4,8 @@ const defaults = {
 	cgsServer: {
 		IP: '127.0.0.1',
 		Port: 5250,
-		Queue: 1
+		Queue: 1,
+		Channel: 1
 	},
 	cgtTemplate: {
 		defaultBB: {
@@ -39,7 +40,7 @@ const defaults = {
 			layer: 22,
 			sendJSON: false,
 			defaultPlayTime: 7,
-			dataSource: ''
+			dataSource: 'jumpers.csv'
 		}
 	}
 };

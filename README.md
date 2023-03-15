@@ -9,8 +9,8 @@ App-Settings and CSV-Files should be stored under `%APPDATA%\[ApplicationName]` 
 ## Todo
 
 - [x] Clear all Layers Button
-- [ ] Make CSV-Name changable (through setting)
-- [ ] Make CG-Channel changable (through setting)
+- [x] Make CSV-Name changable (through setting) => testing
+- [x] Make CG-Channel changable (through setting) => testing
 - [x] Update CSV button (where to put it?)
 
 ## Nice to have

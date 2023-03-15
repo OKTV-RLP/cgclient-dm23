@@ -1,11 +1,12 @@
 const { app } = require('electron');
 const path = require('path');
 const fs = require('fs');
-// const settings = require('./settings');
+const settings = require('./settings');
 const { parse } = require('csv-parse');
 const log = require('electron-log');
 
-const csvPath = path.join(app.getPath('userData'), 'jumpers.csv');
+const fileName = settings.get('cgtTemplate.jumpBB.dataSource');
+const csvPath = path.join(app.getPath('userData'), fileName);
 
 const getCSV = () => {
 	return new Promise((resolve, reject) => {
