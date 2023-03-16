@@ -1,40 +1,54 @@
 {
-    "name": "ok-grafikctrl",
-    "version": "0.1.0",
-    "private": true,
-    "main": "src/electron/main.js",
-    "scripts": {
-        "build": "rollup -c",
-        "dev": "rollup -c -w",
-        "start": "electron ."
-    },
-    "devDependencies": {
-        "@rollup/plugin-commonjs": "^24.0.0",
-        "@rollup/plugin-node-resolve": "^15.0.0",
-        "@rollup/plugin-terser": "^0.4.0",
-        "@tailwindcss/forms": "^0.5.3",
-        "autoprefixer": "^10.4.13",
-        "electron": "^23.1.2",
-        "electron-reloader": "^1.2.3",
-        "eslint": "^8.35.0",
-        "eslint-config-prettier": "^8.7.0",
-        "eslint-plugin-svelte3": "^4.0.0",
-        "prettier": "^2.8.4",
-        "prettier-plugin-tailwindcss": "^0.2.4",
-        "rollup": "^3.15.0",
-        "rollup-plugin-css-only": "^4.3.0",
-        "rollup-plugin-livereload": "^2.0.0",
-        "rollup-plugin-svelte": "^7.1.2",
-        "svelte": "^3.55.0",
-        "svelte-preprocess": "^5.0.1",
-        "tailwindcss": "^3.2.7"
-    },
-    "dependencies": {
-        "casparcg-connection": "^6.0.1",
-        "csv": "^6.2.8",
-        "electron-log": "^5.0.0-beta.16",
-        "electron-store": "^8.1.0",
-        "electron-util": "^0.17.2",
-        "sirv-cli": "^2.0.0"
-    }
+	"name": "ok-grafikctrl-dm23",
+	"version": "1.0.0",
+	"private": true,
+	"author": {
+		"name": "Lukas Herzog",
+		"email": "herzog@ok-nahetv.de",
+		"url": "https://ok-nahetv.de"
+	},
+	"description": "Custom Client for CasparCG for DM Ropeskipping 2023",
+	"main": "src/electron/main.js",
+	"scripts": {
+		"build": "rollup -c",
+		"dev": "rollup -c -w",
+		"start": "electron .",
+		"dist": "npm run build && electron-builder"
+	},
+	"build": {
+		"appId": "naheTV.GrafikDM",
+		"win": {
+			"icon": "src/electron/icon.ico"
+		}
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^24.0.0",
+		"@rollup/plugin-node-resolve": "^15.0.0",
+		"@rollup/plugin-terser": "^0.4.0",
+		"@tailwindcss/forms": "^0.5.3",
+		"autoprefixer": "^10.4.13",
+		"electron": "^23.1.2",
+		"electron-builder": "^23.6.0",
+		"electron-reloader": "^1.2.3",
+		"eslint": "^8.35.0",
+		"eslint-config-prettier": "^8.7.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"prettier": "^2.8.4",
+		"prettier-plugin-tailwindcss": "^0.2.4",
+		"rollup": "^3.15.0",
+		"rollup-plugin-css-only": "^4.3.0",
+		"rollup-plugin-livereload": "^2.0.0",
+		"rollup-plugin-svelte": "^7.1.2",
+		"svelte": "^3.55.0",
+		"svelte-preprocess": "^5.0.1",
+		"tailwindcss": "^3.2.7"
+	},
+	"dependencies": {
+		"casparcg-connection": "^6.0.1",
+		"csv": "^6.2.8",
+		"electron-log": "^5.0.0-beta.16",
+		"electron-store": "^8.1.0",
+		"electron-util": "^0.17.2",
+		"sirv-cli": "^2.0.0"
+	}
 }

@@ -17,4 +17,4 @@ App-Settings and CSV-Files should be stored under `%APPDATA%\[ApplicationName]` 
 
 - [ ] Display CG-Server-Version in Utils-Page
 - [ ] Display CSV-Location in Utils-Page
-- [ ] App-Icon
+- [x] App-Icon
