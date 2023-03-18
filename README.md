@@ -12,6 +12,7 @@ App-Settings and CSV-Files should be stored under `%APPDATA%\[ApplicationName]` 
 - [x] Make CSV-Name changable (through setting) => testing
 - [x] Make CG-Channel changable (through setting) => testing
 - [x] Update CSV button (where to put it?)
+- [ ] UI for award ceremony
 
 ## Nice to have
 

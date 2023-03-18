@@ -41,6 +41,25 @@ const defaults = {
 			sendJSON: false,
 			defaultPlayTime: 7,
 			dataSource: 'jumpers.csv'
+		},
+		ceremonyBB: {
+			template: '',
+			keys: ['f0', 'f1', 'f2', 'f3'],
+			layer: 22,
+			sendJSON: false,
+			defaultPlayTime: 7,
+			selectOptions: [
+				'AK 0 (30+) weiblich',
+				'AK 0 (30+) männlich',
+				'AK 1 (19+) weiblich',
+				'AK 1 (19+) männlich',
+				'AK 2 (16-18) weiblich',
+				'AK 2 (16-18) männlich',
+				'AK 3 (14-15) weiblich',
+				'AK 3 (14-15) männlich',
+				'AK 4 (12-13) weiblich',
+				'AK 4 (12-13) männlich'
+			]
 		}
 	}
 };
