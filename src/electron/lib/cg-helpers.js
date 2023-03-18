@@ -31,7 +31,7 @@ const getLayerFromSlot = async (slot) => {
 
 // Play Template
 const cgPlay = async (slot, auto, templateData, apDuration = 5) => {
-	const channel = await settings.get(`cgtServer.Channel`);
+	const channel = await settings.get(`cgsServer.Channel`);
 	const templateSettings = await settings.get(`cgtTemplate.${slot}`);
 	const { template, keys, layer, sendJSON } = templateSettings;
 	let data;
@@ -71,7 +71,7 @@ const cgPlay = async (slot, auto, templateData, apDuration = 5) => {
 
 // Stop Template
 const cgStop = async (layer) => {
-	const channel = await settings.get(`cgtServer.Channel`);
+	const channel = await settings.get(`cgsServer.Channel`);
 	const { error, request } = CG.cgStop({
 		channel,
 		layer,
@@ -102,7 +102,7 @@ const cgUpdate = async (slot, auto, templateData, timeout) => {
 
 // Clear CG Leyer
 const cgClear = async (layer) => {
-	const channel = await settings.get(`cgtServer.Channel`);
+	const channel = await settings.get(`cgsServer.Channel`);
 	const { error, request } = CG.cgClear({
 		channel,
 		layer
@@ -118,7 +118,7 @@ const cgClear = async (layer) => {
 
 // Clear CG Channel
 const cgClearAll = async () => {
-	const channel = await settings.get(`cgtServer.Channel`);
+	const channel = await settings.get(`cgsServer.Channel`);
 	const { error, request } = CG.clear({ channel });
 
 	if (error) {
