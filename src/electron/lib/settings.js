@@ -44,7 +44,7 @@ const defaults = {
 		},
 		ceremonyBB: {
 			template: '',
-			keys: ['f0', 'f1', 'f2', 'f3'],
+			keys: ['f0', 'f1', 'f2'],
 			layer: 22,
 			sendJSON: false,
 			defaultPlayTime: 7,

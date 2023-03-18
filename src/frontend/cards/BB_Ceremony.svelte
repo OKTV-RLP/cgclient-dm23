@@ -94,7 +94,7 @@
 		<Input label="Name" name="bb_col2" id="bb_col2" bind:value={bb_col2} />
 		<Input label="Platz" name="bb_col1" id="bb_col1" type="number" bind:value={bb_col1} />
 		<Select
-			bind:value={bb_col3}
+			bind:value={id_col3}
 			label="Kategorie"
 			name="category"
 			id="bb_col3"
